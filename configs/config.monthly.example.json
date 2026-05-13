@@ -1,0 +1,169 @@
+{
+  "api_key_env": "YOUTUBE_API_KEY",
+  "output_dir": "output",
+  "sleep_seconds": 0.1,
+  "retries": 3,
+  "timeout_seconds": 30,
+  "scene_terms": [
+    "Roblox",
+    "Sailor Piece",
+    "Seal M",
+    "AFK",
+    "auto farm",
+    "farming",
+    "multi-instance",
+    "cloud phone",
+    "Android cloud phone",
+    "24/7"
+  ],
+  "settings": {
+    "lookback_days": 31,
+    "published_after": null,
+    "published_before": null,
+    "region_code": null,
+    "relevance_language": null,
+    "order": "date",
+    "use_search_date_windows": true,
+    "search_window_days": 7,
+    "max_results_per_query_per_window": 50,
+    "max_results_per_query": 300,
+    "official_uploads_max_per_channel": 500,
+    "baseline_count": 10,
+    "collect_comments": false,
+    "comments_max_results": 30,
+    "strict_brand_filter": true,
+    "official_channel_brand_override": true,
+    "strict_brand_filter_rule": "alias_or_official_domain"
+  },
+  "official_channels": [
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Cloud Phone",
+      "handle": "@ugphone"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "Ugphone雲手機",
+      "handle": "@Ugphone_tw"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone ประเทศไทย",
+      "handle": "@UgPhoneth"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgScript",
+      "handle": "@UgScript"
+    },
+    {
+      "brand": "VS",
+      "channel_name": "VSPhone Official",
+      "handle": "@VSPhoneOfficial"
+    },
+    {
+      "brand": "LD",
+      "channel_name": "LDCloud",
+      "handle": "@LDCloud"
+    },
+    {
+      "brand": "RF",
+      "channel_name": "RedfingerOfficial",
+      "handle": "@redfingerofficial"
+    },
+    {
+      "brand": "RF",
+      "channel_name": "Redfinger",
+      "handle": "@Redfinger-cloud"
+    }
+  ],
+  "brands": [
+    {
+      "brand": "RF",
+      "display_name": "RedFinger",
+      "aliases": [
+        "RedFinger",
+        "Redfinger",
+        "Red Finger",
+        "RF cloud phone"
+      ],
+      "official_domains": [
+        "cloudemulator.net",
+        "redfinger.com"
+      ],
+      "search_terms": [
+        "RedFinger",
+        "Red Finger",
+        "Redfinger cloud phone",
+        "Redfinger AFK",
+        "Redfinger cloud gaming",
+        "Redfinger Roblox",
+        "Redfinger coupon code"
+      ]
+    },
+    {
+      "brand": "LD",
+      "display_name": "LD Cloud",
+      "aliases": [
+        "LD Cloud",
+        "LDCloud",
+        "LD Cloud Phone",
+        "LDPlayer cloud phone",
+        "LD cloud phone"
+      ],
+      "official_domains": [
+        "ldcloud.net",
+        "ldplayer.net"
+      ],
+      "search_terms": [
+        "LD Cloud",
+        "LDCloud cloud phone",
+        "LD Cloud phone AFK",
+        "LDCloud Roblox",
+        "LDPlayer cloud phone",
+        "LDCloud discount code"
+      ]
+    },
+    {
+      "brand": "Ug",
+      "display_name": "UgPhone",
+      "aliases": [
+        "UgPhone",
+        "UGPhone",
+        "Ug Phone"
+      ],
+      "official_domains": [
+        "ugphone.com"
+      ],
+      "search_terms": [
+        "UgPhone",
+        "Ug Phone",
+        "UgPhone cloud phone",
+        "UgPhone AFK",
+        "UgPhone Roblox",
+        "UgPhone Sailor Piece",
+        "UgPhone cloud phone code"
+      ]
+    },
+    {
+      "brand": "VS",
+      "display_name": "VSPhone",
+      "aliases": [
+        "VSPhone",
+        "VS Phone"
+      ],
+      "official_domains": [
+        "vsphone.com"
+      ],
+      "search_terms": [
+        "VSPhone",
+        "VS Phone",
+        "VSPhone cloud phone",
+        "VSPhone AFK",
+        "VSPhone Roblox",
+        "VSPhone game farming",
+        "VSPhone referral code"
+      ]
+    }
+  ]
+}
