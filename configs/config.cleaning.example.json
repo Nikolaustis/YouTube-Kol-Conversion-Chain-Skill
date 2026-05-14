@@ -1,0 +1,100 @@
+{
+  "official_channels": [
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Cloud Phone",
+      "handle": "@ugphone",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "Ugphone雲手機",
+      "handle": "@Ugphone_tw",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone ประเทศไทย",
+      "handle": "@UgPhoneth",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgScript",
+      "handle": "@UgScript",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Indonesia",
+      "handle": "@ugphone-indonesia",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone 日本公式チャンネル",
+      "handle": "@ugphonejp",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Vietnam Shop / Vietnam",
+      "handle": "@ugphonevn",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Vietnam",
+      "handle": "@ugphonevietnam",
+      "role": "official"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Korea",
+      "handle": "@ugphone_kr",
+      "role": "official"
+    },
+    {
+      "brand": "VS",
+      "channel_name": "VSPhone Official",
+      "handle": "@VSPhoneOfficial",
+      "role": "official"
+    },
+    {
+      "brand": "LD",
+      "channel_name": "LDCloud",
+      "handle": "@LDCloud",
+      "role": "official"
+    },
+    {
+      "brand": "RF",
+      "channel_name": "RedfingerOfficial",
+      "handle": "@redfingerofficial",
+      "role": "official"
+    },
+    {
+      "brand": "RF",
+      "channel_name": "Redfinger",
+      "handle": "@Redfinger-cloud",
+      "role": "official"
+    },
+    {
+      "brand": "RF",
+      "channel_name": "Redfinger Cloud Phone 紅手指雲手機",
+      "handle": "@redfinger888",
+      "role": "official"
+    }
+  ],
+  "excluded_channels": [
+    {
+      "channel_name": "Bot Cloud Phone",
+      "handle": "@botcloudphone",
+      "reason": "small competitor, not target-brand downstream channel"
+    },
+    {
+      "channel_name": "Max Cloud Phone",
+      "handle": "@maxcloudphone",
+      "reason": "small competitor, not target-brand downstream channel"
+    }
+  ]
+}

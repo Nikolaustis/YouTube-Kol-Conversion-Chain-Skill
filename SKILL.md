@@ -1,161 +1,78 @@
-# YouTube KOL Conversion Chain Analyzer
+# YouTube KOL Conversion Chain Analyzer Skill
 
-## Purpose
+Use this Skill when the user needs to analyze YouTube creator/KOL videos for cloud-phone competitors such as RF/Redfinger, LDCloud, UgPhone, and VSPhone.
 
-Analyze public YouTube creator videos for cloud-phone competitors and compare RF / LD / UgPhone / VSPhone on:
+## What this Skill does
 
-1. YouTube creator exposure;
-2. official-account vs KOL/creator content separation;
-3. conversion-chain clarity in video descriptions;
-4. invite/referral/discount/code traces;
-5. official buy page / app-store / social-private redirects;
-6. brand-video performance relative to each channel's normal videos;
-7. creator/channel-level summaries by `channel × brand`.
+1. Collects public YouTube video metadata via YouTube Data API v3.
+2. Searches configured brand and scene keywords by date range.
+3. Resolves configured official channels by handle and collects official uploads separately.
+4. Extracts conversion-chain signals from video descriptions:
+   - official site links
+   - purchase/buy page links
+   - Google Play/App Store links
+   - invite/referral/discount/code traces
+   - short links
+   - Discord/Telegram/WhatsApp/social redirects
+   - reseller/distributor/code-selling traces as content signals only
+5. Computes channel-baseline performance index.
+6. Strong-cleans false positives and reclassifies regional official accounts using `clean_existing_youtube_outputs.py`.
+7. Recomputes clean summaries for reporting.
 
-Use this skill for the competitor research topic:
+## Required environment
 
-> Cloud-phone competitor YouTube KOL conversion-chain analysis: from video descriptions, invite codes, purchase pages, social redirects, and traffic performance.
+- Python 3.10+
+- `pip install -r requirements.txt`
+- `YOUTUBE_API_KEY` environment variable
 
-## Safety and Data Boundaries
+Never hardcode or print API keys.
 
-- Use YouTube Data API v3 as the primary source.
-- Public videos only.
-- Do not bypass login, age, region, membership, or private-content restrictions.
-- Do not scrape private analytics.
-- Do not claim competitor GMV, revenue, ad spend, or exact conversion without reliable internal or third-party paid data.
-- Read `YOUTUBE_API_KEY` from environment only. Do not hardcode or print secrets.
+## Recommended workflow
 
-## Default Scope
-
-The default config collects videos from the latest 365 days:
-
-- `lookback_days = 365`
-- `published_after = null`
-- `published_before = null`
-
-If `published_after` is null, the script automatically uses `run_time - 365 days`.
-If `published_before` is null, the script uses current run time.
-
-For better recall, the search stage splits the 365-day range into 30-day windows by default. YouTube Search API still cannot guarantee absolute full-platform coverage, so the result should be treated as a structured public-signal sample.
-
-Official channels are collected separately from their uploads playlist and filtered by the same 365-day range.
-
-## Official Channels
-
-The default official channel list is configured in `configs/config.example.json`:
-
-- UgPhone Cloud Phone / `@ugphone`
-- Ugphone雲手機 / `@Ugphone_tw`
-- UgPhone ประเทศไทย / `@UgPhoneth`
-- UgScript / `@UgScript`
-- VSPhone Official / `@VSPhoneOfficial`
-- LDCloud / `@LDCloud`
-- RedfingerOfficial / `@redfingerofficial`
-- Redfinger / `@Redfinger-cloud`
-
-Rows from these official channels are marked as:
-
-- `is_official_channel = true`
-- `creator_type = official`
-
-All other matched videos are treated as:
-
-- `creator_type = kol/creator`
-
-## Key Outputs
-
-Each run creates a timestamped folder under `output/`, for example:
-
-```text
-output/youtube_kol_run_20260512T030000Z/
-```
-
-Main files:
-
-| File | Purpose |
-|---|---|
-| `videos.csv` | All collected video rows. A video can appear once per matched brand. |
-| `videos.jsonl` | Same video rows in JSONL format. |
-| `kol_videos.csv` | Non-official creator/KOL videos only. Official channel rows are removed. |
-| `official_videos.csv` | Official account videos only. |
-| `conversion_paths.csv` | Link, CTA, invite code, discount code, social redirect, distribution trace fields. |
-| `channel_baselines.csv` | Channel-level baseline comparison for brand-video performance index. |
-| `creator_brand_summary.csv` | KOL/creator summary at `channel × brand` level. If one creator serves multiple brands, each brand gets one row. |
-| `official_channel_summary.csv` | Official account summary at `channel × brand` level. |
-| `brand_summary.csv` | Brand-level aggregate metrics. |
-| `youtube_kol_conversion_report.xlsx` | Excel report with all key sheets. |
-| `run_summary.json` | Run status, effective date range, quota estimate, counts. |
-| `api_call_log.json` | API call log without secrets. |
-| `run_log.txt` | Runtime log. |
-
-## Important Metrics
-
-### Conversion Path Score
-
-| Score | Meaning |
-|---:|---|
-| 0 | No link, invite code, purchase guide, or social redirect found. |
-| 1 | Brand name, official site, or app-store link exists, but conversion path is weak. |
-| 2 | Official site, buy page, app store, or social/private redirect exists. |
-| 3 | Referral/invite/discount/code trace, buy page, or clear purchase guide exists. |
-
-### Brand Video Performance Index
-
-```text
-brand_video_performance_index = brand_video_views_per_day / channel_recent_non_brand_avg_views_per_day
-```
-
-Interpretation:
-
-| Index | Meaning |
-|---:|---|
-| > 1.2 | Brand video performs above channel norm. |
-| 0.8–1.2 | Brand video is close to channel norm. |
-| 0.5–0.8 | Brand video may underperform due to ad-like content, mismatch, or timing. |
-| < 0.5 | Brand video strongly underperforms and should be manually reviewed. |
-
-## Standard Commands
-
-Install dependencies:
+For monthly runs:
 
 ```bash
-pip install -r requirements.txt
+python scripts/youtube_kol_chain_analyzer.py --config configs/config.monthly.example.json --dry-run
+python scripts/youtube_kol_chain_analyzer.py --config configs/config.monthly.example.json
+python scripts/clean_existing_youtube_outputs.py --input output --output output_cleaned --config configs/config.cleaning.example.json
 ```
 
-Set API key:
+For already collected historical data:
 
 ```bash
-export YOUTUBE_API_KEY="YOUR_KEY"
+python scripts/clean_existing_youtube_outputs.py --input path/to/monthly_outputs_or_zip --output path/to/cleaned_outputs --config configs/config.cleaning.example.json
 ```
 
-Windows PowerShell:
+## Current clean classification policy
 
-```powershell
-$env:YOUTUBE_API_KEY="YOUR_KEY"
-```
+Only three buckets are used in clean reporting:
 
-Dry run:
+1. Official accounts: official and regional official accounts.
+2. Ordinary KOL/creators: non-official third-party creators after cleaning.
+3. Excluded/noise: small competitors and false-positive matches.
 
-```bash
-python scripts/youtube_kol_chain_analyzer.py --config configs/config.example.json --dry-run
-```
+There is intentionally no `managed` / dealer / agent reporting bucket. If old folders contain `managed_*` files, ignore them.
 
-Full run:
+## Important reporting files
 
-```bash
-python scripts/youtube_kol_chain_analyzer.py --config configs/config.example.json
-```
+Always use clean recomputed outputs:
 
-## Suggested Report Angle
+- `brand_summary_clean.csv`
+- `creator_brand_summary_clean.csv`
+- `official_channel_summary_clean.csv`
+- `kol_videos_clean.csv`
+- `official_videos_clean.csv`
+- `excluded_channels.csv`
+- `dropped_false_positives.csv`
+- `review_videos.csv`
 
-Do not write the report as “who has more videos.” Frame it as:
+## Reporting guidance
 
-> YouTube creator-channel competition is not only about how many creators a brand uses, but whether the video traffic is connected to a clear conversion path: download, purchase, invite code, discount code, referral trace, or social/private consultation.
+Do not claim competitor GMV or revenue from YouTube data alone. Frame results as public-signal analysis:
 
-Focus on:
-
-1. official videos vs KOL videos;
-2. conversion-chain clarity;
-3. creator overlap across brands;
-4. whether brand videos perform above/below each channel's normal videos;
-5. what UgPhone can standardize in future creator cooperation, such as CTA templates, landing pages, invite codes, and tracking links.
+- exposure scale
+- conversion-chain clarity
+- creator overlap
+- official vs KOL CTA differences
+- invite/referral/code traces
+- content-fit via cleaned performance index

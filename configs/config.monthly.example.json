@@ -18,22 +18,20 @@
   ],
   "settings": {
     "lookback_days": 31,
-    "published_after": null,
-    "published_before": null,
+    "published_after": "2025-09-01T00:00:00Z",
+    "published_before": "2025-10-01T00:00:00Z",
     "region_code": null,
     "relevance_language": null,
     "order": "date",
-    "use_search_date_windows": true,
-    "search_window_days": 7,
+    "use_search_date_windows": false,
+    "search_window_days": 30,
     "max_results_per_query_per_window": 50,
     "max_results_per_query": 300,
     "official_uploads_max_per_channel": 500,
     "baseline_count": 10,
     "collect_comments": false,
     "comments_max_results": 30,
-    "strict_brand_filter": true,
-    "official_channel_brand_override": true,
-    "strict_brand_filter_rule": "alias_or_official_domain"
+    "strict_brand_filter": false
   },
   "official_channels": [
     {
@@ -57,6 +55,31 @@
       "handle": "@UgScript"
     },
     {
+      "brand": "Ug",
+      "channel_name": "UgPhone Indonesia",
+      "handle": "@ugphone-indonesia"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone 日本公式チャンネル",
+      "handle": "@ugphonejp"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Vietnam Shop / Vietnam",
+      "handle": "@ugphonevn"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Vietnam",
+      "handle": "@ugphonevietnam"
+    },
+    {
+      "brand": "Ug",
+      "channel_name": "UgPhone Korea",
+      "handle": "@ugphone_kr"
+    },
+    {
       "brand": "VS",
       "channel_name": "VSPhone Official",
       "handle": "@VSPhoneOfficial"
@@ -75,15 +98,20 @@
       "brand": "RF",
       "channel_name": "Redfinger",
       "handle": "@Redfinger-cloud"
+    },
+    {
+      "brand": "RF",
+      "channel_name": "Redfinger Cloud Phone 紅手指雲手機",
+      "handle": "@redfinger888"
     }
   ],
   "brands": [
     {
       "brand": "RF",
-      "display_name": "RedFinger",
+      "display_name": "Redfinger",
       "aliases": [
-        "RedFinger",
         "Redfinger",
+        "RedFinger",
         "Red Finger",
         "RF cloud phone"
       ],
@@ -93,21 +121,23 @@
       ],
       "search_terms": [
         "RedFinger",
-        "Red Finger",
+        "Redfinger",
         "Redfinger cloud phone",
         "Redfinger AFK",
         "Redfinger cloud gaming",
         "Redfinger Roblox",
-        "Redfinger coupon code"
+        "Redfinger coupon code",
+        "\"Red Finger\" \"cloud phone\"",
+        "\"Red Finger\" AFK",
+        "\"Red Finger\" Roblox"
       ]
     },
     {
       "brand": "LD",
-      "display_name": "LD Cloud",
+      "display_name": "LDCloud",
       "aliases": [
-        "LD Cloud",
         "LDCloud",
-        "LD Cloud Phone",
+        "LD Cloud",
         "LDPlayer cloud phone",
         "LD cloud phone"
       ],
@@ -116,6 +146,7 @@
         "ldplayer.net"
       ],
       "search_terms": [
+        "LDCloud",
         "LD Cloud",
         "LDCloud cloud phone",
         "LD Cloud phone AFK",
@@ -142,7 +173,10 @@
         "UgPhone AFK",
         "UgPhone Roblox",
         "UgPhone Sailor Piece",
-        "UgPhone cloud phone code"
+        "UgPhone cloud phone code",
+        "\"Ug Phone\" \"cloud phone\"",
+        "\"Ug Phone\" AFK",
+        "\"Ug Phone\" Roblox"
       ]
     },
     {
@@ -157,13 +191,28 @@
       ],
       "search_terms": [
         "VSPhone",
-        "VS Phone",
         "VSPhone cloud phone",
         "VSPhone AFK",
         "VSPhone Roblox",
         "VSPhone game farming",
-        "VSPhone referral code"
+        "VSPhone referral code",
+        "\"VS Phone\" \"cloud phone\"",
+        "\"VS Phone\" AFK",
+        "\"VS Phone\" Roblox",
+        "\"VS Phone\" referral code"
       ]
+    }
+  ],
+  "excluded_channels": [
+    {
+      "channel_name": "Bot Cloud Phone",
+      "handle": "@botcloudphone",
+      "reason": "small competitor, not target-brand downstream channel"
+    },
+    {
+      "channel_name": "Max Cloud Phone",
+      "handle": "@maxcloudphone",
+      "reason": "small competitor, not target-brand downstream channel"
     }
   ]
 }
